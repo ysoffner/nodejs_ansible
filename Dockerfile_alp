@@ -1,0 +1,14 @@
+FROM alpine:3.6
+
+# Update LTS version
+RUN apk add --update nodejs nodejs-npm 
+
+# Install app dependencies
+COPY package.json /src/package.json
+RUN cd /src; npm install && npm install express --save
+
+# Bundle app source
+COPY . /src
+
+EXPOSE  3000
+CMD ["node", "/src/index.js"]
