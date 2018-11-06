@@ -23,6 +23,7 @@ docker build -f Dockerfile_alp -t alp_node .
 docker run -i -t alp_node
 
 #### Referencias
+https://docs.ansible.com/ansible/2.6/modules/docker_image_module.html
 https://github.com/nodesource/distributions/blob/master/README.md
 http://expressjs.com/pt-br/starter/installing.html
 https://puppet.com/docs/pipelines-for-apps/free/docker-nodejs.html#before-you-begin
