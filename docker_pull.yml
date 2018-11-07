@@ -61,3 +61,7 @@
   # deve reiniciar os processos sem afetar a disponibilidade
 # A aplicação Node deverá ser acessada via server Web com um Proxy Reverso, intermediando http(s) e processos nodes
 # Fazer um script para teste de carga, demostrando o Throughput maximo do servidorchkconfig --list ntpdate
+#http://pm2.keymetrics.io/docs/usage/cluster-mode/
+#http://www.acuriousanimal.com/2017/08/20/using-pm2-to-manage-cluster.html
+# https://medium.com/bigpanda-engineering/using-ansible-to-compile-nginx-from-sources-with-custom-modules-f6e6c6a42493
+# https://medium.com/@ahmadfarag/ansible-in-action-f2f17706931
