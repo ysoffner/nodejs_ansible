@@ -1,17 +1,63 @@
 - hosts: localhost
   tasks:
+
   - name: pull an image
     docker_image:
       name: alpine:latest
 
-  - name: Build image
+#nodejs
+  - name: Build image NodeJS
     docker_image:
        path: ./
        dockerfile: Dockerfile_lts
-       name: teste
+       name: ysoffner/app_nodejs
+
+#nginx
+  # - name: Build image Nginx
+  #   docker_image:
+  #      path: ./
+  #      dockerfile: Dockerfile_nginx
+  #      name: ysoffner/app_nginx
+
+#CLEAN
+  # - name: Remove container from all networks
+  #   docker_container:
+  #     name: app_nodejs
+  #     purge_networks: yes
+
+  # - name: Delete a network, disconnecting all containers
+  #   docker_network:
+  #     name: ysoffner_net
+  #     state: absent
+  #     force: yes
+#END CLEAN
+
+  - name: Create a network with options
+    docker_network:
+      name: ysoffner_net
+      ipam_options:
+        subnet: '172.3.26.1/16'
+        gateway: 172.3.26.0
+        iprange: '172.3.26.50/24'
+
+  - name: Start container, connect to network and link
+    docker_container:
+      name: app_nodejs
+      image: ysoffner/app_nodejs
+      networks:
+        - name: ysoffner_net
+
+
+#haproxy
+
+#erro fatal: [localhost]: FAILED! => {"changed": false, "msg": "Error connecting: load_config() got an unexpected keyword argument 'config_dict'"}
+# - name: Start docker-compose.yml
+#   docker_service:
+#     project_src: ./
+#     state: present
 
 # Projeto de rollback, precisa gerar um push com a imagem atual, e voltar a versão
 # Projeto de CI, acho que pelo ansible tem, mas da pra fazer por github / travis / hub.docker
   # deve reiniciar os processos sem afetar a disponibilidade
 # A aplicação Node deverá ser acessada via server Web com um Proxy Reverso, intermediando http(s) e processos nodes
-# Fazer um script para teste de carga, demostrando o Throughput maximo do servidor
+# Fazer um script para teste de carga, demostrando o Throughput maximo do servidorchkconfig --list ntpdate
