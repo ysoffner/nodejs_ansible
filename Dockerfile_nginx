@@ -1,0 +1,4 @@
+FROM nginx:latest
+COPY roles/nginx/files/nginx.conf /etc/nginx/nginx.conf
+
+# docker run --rm --name some-nginx -v ${PWD}/roles/nginx/files/default.conf:/etc/nginx/nginx.conf  nginx

@@ -5,7 +5,7 @@ MAINTAINER "Yuri Soffner" <ysoffner@gmail.com>
 #Melhorias: from alpine:nodejs
 
 ENV WORK_DIR="app"
-ENV MODULES="express cluster http os"
+ENV MODULES="express"
 
 #If mantain package: #COPY package.json /app/package.json
 RUN mkdir /$WORK_DIR; cd /$WORK_DIR && npm init -y && \
@@ -19,6 +19,5 @@ COPY $WORK_DIR/ /$WORK_DIR/
 
 WORKDIR /$WORK_DIR
 
-EXPOSE  3000
-# CMD [ "pm2-runtime", "npm", "--", "start", "app_pm2.js" ]
-CMD ["bash"]
+# EXPOSE  3000
+CMD [ "pm2-runtime", "start", "pm2.yml" ]
